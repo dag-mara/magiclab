@@ -6,7 +6,7 @@ global $post;
 wp_reset_query();
 $paged = get_query_var('paged');
 query_posts( array(
-						'posts_per_page' => 9,
+						'posts_per_page' => 18,
 						'post_type'   => 'mau_project',
 						'paged'      => 0,
 						'orderby' => 'menu_order',
@@ -50,7 +50,7 @@ query_posts( array(
 <div class="row">
 	<div class="columns small-12 more-link">
 		<img src="<?=get_template_directory_uri()?>/images/loader.svg" />
-		<a class="magic-button load-more-work" data-call="works_more" data-tax="" data-paged="1" data-sum="9"><?php esc_html_e('View More', 'magiclab'); ?></a>
+		<a class="magic-button load-more-work" data-call="works_more" data-tax="" data-paged="2" data-sum="9"><?php esc_html_e('View More', 'magiclab'); ?></a>
 	</div>
 </div>
 <?php wp_reset_query(); ?>

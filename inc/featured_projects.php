@@ -46,9 +46,10 @@ $featured = get_posts( array(
 				</article>
 
 		<?php endforeach; ?>
+
 		<div class="columns small-12 more-link">
-			<a class="magic-button" href="<?php echo get_post_type_archive_link('mau_project'); ?>"><?php esc_html_e('View More', 'magiclab'); ?></a>
+			<a class="magic-button" href="<?php echo get_post_type_archive_link('mau_project'); ?>"><?php esc_html_e('View Mores', 'magiclab'); ?></a>
 		</div>
-	</div>
+</div>
 
 <?php wp_reset_query(); ?>

@@ -160,7 +160,9 @@ function magiclab_vfx_link($post_id=null) {
 			$link = get_post_meta($post_id, 'mlab_fin_project_vfx_url',true);
 			break;
 	}
-	echo '<a class="vfx-link '.esc_attr($extra_class).' magic-button" href="'.esc_url($link).'" '.$data.' >VFX Breakdown</a>';
+//	echo '<a class="vfx-link '.esc_attr($extra_class).' magic-button" href="'.esc_url($link).'" '.$data.' >VFX Breakdown</a>';
+	
+	echo '<a class="vfx-link '.esc_attr($extra_class).' magic-button" href="'.esc_url($link).'" '.$extra_attrs.' >VFX Breakdown</a>';
 }
 
 
@@ -226,7 +228,7 @@ function the_works_data(){
 	}
 
 	query_posts( array(
-				'posts_per_page' => 9,
+				'posts_per_page' => 15,
 				'post_type'   => 'mau_project',
 				'paged'      => $paged+1,
 				'orderby' => 'menu_order',
@@ -261,8 +263,10 @@ function the_works_data(){
 }
 
 function the_finished_projects_m($post_type){
+	
 	$argRet = array();
 
+	
 	$args = array(
 	   'meta_key'       => '_mau_feat_lite',
 	   'post_type'      => $post_type,
@@ -271,21 +275,30 @@ function the_finished_projects_m($post_type){
 	   'posts_per_page' => 16
    );
    $featured = get_posts($args);
+   
+   $notIn = [];
+   foreach($featured as $f){
+	   $notIn[] = $f->ID;
+   }
+   
+   
    $cFeatured = count($featured);
    if($cFeatured > 0){
 	   $argRet = $featured;
    }
-   if($cFeatured < 16){
+   //if($cFeatured < 16){
 	   $sum = (16 - $cFeatured);
+	   $sum = -1;
 	   $args = array(
 	   	   'post_type'      => $post_type,
 	   	   'orderby'        => 'menu_order',
 	   	   'order'          => 'ASC',
 	   	   'posts_per_page' => $sum,
+		   'post__not_in' => $notIn,
 	      );
 	   $all = get_posts($args);
-	   if(count($all) > 0) $argRet = array_merge($argRet,$all);
-   }
+	   $argRet = array_merge($argRet,$all);
+   //}
 
    return $argRet;
 }

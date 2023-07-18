@@ -169,6 +169,7 @@
 
 			// Show infobox
 			$('.finished-project a','#finished-projects, #finished-series').on('click',function(e){
+				console.log('clciked')
 				e.preventDefault();
 				var t = $(this);
 				var p = t.parent();
@@ -183,9 +184,10 @@
 					self.view.removeClass('anim_slide').addClass('anim_fade');
 					self.closeView();
 				} else {
-					self.view.removeClass('anim_fade').addClass(' anim_slide');
+					self.view.removeClass('anim_fade').addClass('anim_slide');
 				}
 				p.addClass('active');
+				console.log('[data-info-id='+target_id+']');
 				$('[data-info-id='+target_id+']',self.view).addClass('active');
 				$('body').addClass('finished-project-opened');
 

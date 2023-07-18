@@ -15,7 +15,7 @@
 		if(!empty($terms)){
 			foreach($terms as $t){
 			?>
-			<li><a data-taxonomy="<?=$t->slug?>" class="works-category"><?=$t->name;?></a></li>
+			<li><a data-taxonomy="<?=$t->slug?>" class="works-category" href="<?php echo get_post_type_archive_link('mau_project') ?>"><?=$t->name;?></a></li>
 			<?php
 			}
 		}

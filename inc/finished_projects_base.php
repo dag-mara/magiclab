@@ -26,23 +26,27 @@ $args = array(
 	'post_type'      => $post_type,
 	'orderby'        => 'menu_order',
 	'order'          => 'ASC',
-	'posts_per_page' => -1,
+	'posts_per_page' => 24,
 );
 
 $all_posts = get_posts($args);
 $all_count = count($all_posts);
+
 
 $feat_args = array(
 	'meta_key'       => '_mau_feat_lite',
 	'fields'         => 'ids',
 	'posts_per_page' => $number_of_featured,
 );
+
 $feat_posts_ids = get_posts(wp_parse_args($feat_args, $args));
 $feat_count = count($feat_posts_ids);
 $no_of_posts_to_add = $feat_args['posts_per_page'] - $feat_count;
+
 ?>
 
-<div id="<?php echo esc_attr($container_id); ?>" class="row">
+
+<div id="<?php echo esc_attr($container_id); ?>" class="row list">
 
 	<?php if(!isset($info_wrapper_rendered)): $info_wrapper_rendered=true; ?>
 		<div id="info-wrapper"></div>
@@ -66,19 +70,24 @@ $no_of_posts_to_add = $feat_args['posts_per_page'] - $feat_count;
 			continue;
 		$i++;
 		$dir = $i > 4 ? 'right' : 'left';
-		if ( $i >= 8 ) $i = 0;
+		//if ( $i >= 8 ) $i = 0;
 		$classes = '';
 		$feat_classes = '';
 		$is_feat = get_post_meta($post->ID, '_mau_feat_lite', true);
+		$is_feta = 1;
 		if ( $is_feat || $no_of_posts_to_add > 0 ) {
 			$feat_i++;
 			$feat_dir = $feat_i > 4 ? 'right' : 'left';
 			if ( $feat_i >= 8 ) $feat_i = 0;
 			$feat_classes .= ' finished-project-'.$feat_dir.'-feat';
 			$classes .= ' finished-project-featured';
+			/*
 			if ( ! $is_feat )
 				$no_of_posts_to_add--;
+				*/
 		}
+		if($i > 8 && $post_type == 'mlab_finished_series') $classes .= ' d-none';
+		if($i > 16 && $post_type != 'mlab_finished_series') $classes .= ' d-none';
 	?>
 	<div class="finished-project <?php echo esc_attr($classes); ?>" data-project-id="<?php the_ID(); ?>">
 		<!-- <a href="#info" class="viewDetail"> -->
@@ -105,13 +114,22 @@ $no_of_posts_to_add = $feat_args['posts_per_page'] - $feat_count;
 	</div>
 	<?php endforeach; ?>
 	</div>
+	
 	<?php wp_reset_query(); ?>
-	<?php if ( $all_count > $feat_args['posts_per_page'] ) : ?>
+	<?php if(count($all_posts) >= 8){?>
+	
+	<?php //if ( $all_count > $feat_args['posts_per_page'] ) : ?>
 		<div class="columns small-12 more-link">
-			<a class="magic-button viewMore" data-page-type="<?=$post_type?>"><?php esc_html_e('All', 'magiclab'); ?></a>
+			<a class="magic-button w-more" data-page-type="<?=$post_type?>" data-showmore=""><?php esc_html_e('SHOW MORE', 'magiclab'); ?></a> 
 			<!--
 			<a class="magic-button" id="<?php echo esc_attr($show_all_id); ?>" href="<?php echo get_post_type_archive_link($post_type); ?>"><?php esc_html_e('All', 'magiclab'); ?></a>
 			-->
 		</div>
-	<?php endif; ?>
-</div>
+	<?php //endif; ?>
+	<?php } ?> 
+</div><style>
+	.d-none{
+		display:none !important;
+	}
+</style>
+

@@ -11,7 +11,7 @@
 
 $template_qvars = array(
 	'heading_text' 		 => 'Series',
-	'number_of_featured' => 8,
+	'number_of_featured' => 24,
 	'post_type' 		 => 'mlab_finished_series',
 	'container_id' 		 => 'finished-series',
 	'show_all_id' 		 => 'finished-series-show-all',
