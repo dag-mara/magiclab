@@ -33,7 +33,7 @@ function magiclab_scripts(){
 	);
 	// Map
 	// @todo is_admin() check needed?
-	if ( is_page('contact') && ! is_admin() ) {
+	/* if ( is_page('contact') && ! is_admin() ) {
 		wp_enqueue_script(
 			'magiclab_gmap',
 			get_stylesheet_directory_uri() . '/js/gmap.js',
@@ -86,5 +86,9 @@ function magiclab_scripts(){
 				'zoom'   => 15,
 			)
 		);
-	}
+	} */
+	wp_enqueue_script('app', get_stylesheet_directory_uri().'/js/app.js', array('jquery','foundation','startup','magiclab'), $ver, true);
+	/* wp_register_script( 'jobs-script', get_stylesheet_directory_uri() . '/js/jobs.js', array('jquery', 'gq-app-script'), false, true );
+	wp_enqueue_script( 'jobs-script' ); */
 }
+

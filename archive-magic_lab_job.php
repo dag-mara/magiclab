@@ -40,19 +40,23 @@
 			<article class="small-12 medium-4 columns text-center job-card" <?php post_class(); ?> >
 
 				<div class="inner">
-
-					<a class="thumb-link" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('medium'); ?></a>
-
-					<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-
-					<!-- <div class="project-tax-link">
-						<?php $terms = get_the_terms( $post->ID , 'location' );
-						foreach ( $terms as $term ) {
-						echo $term->slug . " ";
-						}
-						 ?>
-					</div> -->
-
+					<div class="grid-x">
+						<div class="small-12 medium-6">
+							<a class="thumb-link" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('medium'); ?></a>
+						</div>
+						<div class="small-12 medium-6">
+							<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+							<div class="project-tax-link">
+								<?php $terms = get_the_terms( $post->ID , 'location' );
+								foreach ( $terms as $term ) {
+								echo $term->slug . " ";
+								}
+								?>
+							</div>
+						</div>
+						
+					</div>
+					<hr>
 				</div>
 
 			</article>

@@ -33,24 +33,29 @@ Template Name: Contact Page - new
 
 			<div class="inner row">
 
-				<!-- <h1><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h1> -->
+				<h1 class="text-center"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h1>
 
-				<div class="entry column medium-4">
-					<?php the_content(); ?>
+				<div class="entry column medium-6">
+					<?php the_post_thumbnail(); ?>
 				</div>
 
-				<div class="secondary column medium-8">
+				<div class="secondary column medium-6">
                
-                <?php get_template_part('inc/google_map'); ?>
-
+                <?php /* get_template_part('inc/google_map');  */?>
+                     <?php the_content(); ?>
 
 					<?php //get_template_part('inc/team_members'); ?>
                     <?php if( have_rows('contact') ): ?>
+                        <h2 class="contact-team-header">OUR TEAM</h2>
                         <div class="contact-cards row">
+                           
                         <?php while( have_rows('contact') ): the_row();
                             ?>
                     
-                            <div class="card small-12 medium-6 large-3 column">
+                            <div class="card small-6 column">
+                                <?php if (get_sub_field('image')) :  ?>
+                                <img class="team-img" src="<?php the_sub_field('image');?>" alt="<?php the_sub_field('name');?>">
+                                <?php endif; ?>
                                 <h3><?php the_sub_field('name'); ?></h3>
                                 <?php the_sub_field('contacts'); ?>
                             </div>

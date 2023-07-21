@@ -225,6 +225,8 @@ Visit http://sass-lang.com/ for more information.
 
 	.inner {
 		padding-top: 25px;
+		max-width: 1000px;
+		margin: 0 auto;
 	}
 
 	@media #{$medium-up} {
@@ -339,7 +341,7 @@ Visit http://sass-lang.com/ for more information.
 					position: absolute;
 					top:0;
 					left:0;
-					z-index: 4;
+					z-index: 5;
 					max-width: 25%;
 				}
 				&.left {
@@ -1304,7 +1306,7 @@ Visit http://sass-lang.com/ for more information.
 	}
 
 	.trailer-link,
-	.vfx-link, {
+	.vfx-link {
 		margin-top: 25px;
 	}	
 
@@ -1386,6 +1388,17 @@ Visit http://sass-lang.com/ for more information.
 		}
 	}
 
+@media only screen and (min-width: 40.063em){
+	.site-footer .columns:nth-last-of-type(1) {
+		display: flex;
+		justify-content: flex-end;
+	}
+	.site-footer .columns:nth-of-type(2) {
+		display: flex;
+		justify-content: center;
+	}
+}
+
 
 /* PAGE TEMPLATES */
 	.page-template-templateslead-page-php {
@@ -1445,7 +1458,7 @@ Visit http://sass-lang.com/ for more information.
 		.team {
 			padding: 60px 0 0;
 			line-height: 1.5em;
-			text-align:center;
+			//text-align:center;
 			h2 {
 				font-size:1em;
 			}
@@ -1531,7 +1544,7 @@ Visit http://sass-lang.com/ for more information.
 	.top-bar-section li.menu-icon-fcb:not(.has-form) {
 		height: 70px;
 		padding-top: 16px;
-		padding-right:25px;
+		//padding-right:25px;
 		background: #000;
 		a:not(.button) {
 			padding:0;
@@ -1540,7 +1553,9 @@ Visit http://sass-lang.com/ for more information.
 			height: 37px;
 			overflow: hidden;
 			text-indent: -999px;
-			@include background_image_retina("images/fb_logo_stencil_circle", "png", 19px, 19px );
+			background-image: url("images/facebook-icon.svg");
+			background-size: 19px 19px;
+			//@include background_image_retina("images/fb_logo_stencil", "png", 19px, 19px );
 			background-color: #000;
 			background-repeat: no-repeat;
 			background-position: left center;
@@ -1548,6 +1563,119 @@ Visit http://sass-lang.com/ for more information.
 			// &:hover {
 			// 	background-color: $hover_color;
 			// }
+		}
+	}
+
+	//search icon
+	.top-bar-section li.menu-icon-search:not(.has-form){
+		height: 70px;
+		padding-top: 16px;
+		a:not(.button) {
+			padding:0;
+			//margin-left: -4px;
+			width: 37px;
+			height: 37px;
+			overflow: hidden;
+			text-indent: -999px;
+			background-image: url("images/search-icon.svg");
+			background-size: 19px 19px;
+			//@include background_image_retina("images/search-icon", "svg", 19px, 19px );
+			background-color: #000;
+			background-repeat: no-repeat;
+			background-position: left center;
+
+			// @include transition(background-color,0.1s);
+			// &:hover {
+			// 	background-color: $hover_color;
+			// }
+		}
+		@media only screen and (max-width: 640px){
+			margin-left: 15px
+		}
+	}
+
+	//searchform
+	.search-form-wrapper{
+		background-color: white;
+		display: none;
+		transition: all 1s ease-in;
+		opacity: 0;
+		padding: 26px 30px;
+		z-index: 5;
+		position: relative;
+		.flex{
+			display: flex;
+		}
+		.search-header{
+			justify-content: space-between;
+			position: absolute;
+			top: 1.4rem;
+			width: calc(100% - 60px);
+			z-index: 5;
+			.close-searchform{
+				cursor: pointer;
+			}
+		}
+		.searchform{
+			//border-bottom: 1px solid black;
+			input[type="search"]{
+				border: none;
+				box-shadow: none;
+				padding: 0;
+				color: #C1C1C1;
+				font-size: 40px;
+				@media  screen and (max-width: 900px) {
+					font-size: 30px;
+				}
+				@media  screen and (max-width: 640px) {
+					font-size: 15px;
+					margin-bottom: 0;
+				}
+			}
+			input[type="submit"]{
+				text-align: right;
+				border: none;
+    			background-color: white;
+				//padding: 0 1rem;
+				font-family: inherit;
+				font-size: 11px;
+				cursor: pointer;
+				margin-top: 15px;
+				@media  screen and (max-width: 640px) {
+					margin-top: 0;
+				}
+			}
+			.search-inside{
+				border-bottom: 1px solid #707070;
+				width: 100%;
+				margin: auto;
+				padding: 20px 0 10px 0;
+			}
+			.filter{
+				width: 100%;
+				margin: auto;
+				padding-top: 24.5px;
+				input[type="checkbox"]{
+					top: 4px;
+					margin-right: 12px;
+					@media  screen and (max-width: 640px) {
+						margin-top: 4px;
+					}
+				}
+			}
+		}
+		&.visible{
+			opacity: 1;
+			display: block;
+		}
+	}
+
+	.search-column{
+		padding: 2rem 0.9375rem;
+		font-size: 1.1rem;
+		font-weight: bold;
+		.grey{
+			color: #c1c1c1;
 		}
 	}
 
@@ -1671,26 +1799,179 @@ Visit http://sass-lang.com/ for more information.
 	}
 
 /* JOBS */
-	.job-title {
+.job-title {
+	text-transform: uppercase;
+	margin-bottom: 1em;
+	font-size: 3em;
+}
+.magic_lab_job {
+	margin-top: 2em;
+	margin-bottom: 1em;
+	p {
+		font-size: 1.2em;
+	}
+	.content {
+		padding-bottom: 2em;
+	}
+	.startup-email-link {
 		text-transform: uppercase;
-		margin-bottom: 1em;
-		font-size: 3em;
+		color: #666;
+		font-size: .8em;
 	}
-	.magic_lab_job {
-		margin-top: 2em;
-		margin-bottom: 1em;
-		p {
-			font-size: 1.2em;
+}
+
+
+
+.jobs{
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+	min-height: 70vh;
+	&.single{
+		max-width: 1000px;
+	}
+	/* #gform_1{
+		display: none;
+	} */
+	h1, h2{
+		font-family: EuclidFlex-Medium, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-size: 1.2rem;
+		margin: 21px 0 15px;
+	}
+	h2{
+		margin: 2rem 0 3.5rem;
+		cursor: pointer;
+	}
+	p{
+		font-size: 1rem
+	}
+	.type-mau_project {
+		height: 100%
+	}
+	.image img {
+		width:100%
+	}
+	.gform_required_legend{
+		display: none;
+	}
+	input,
+	select,
+	textarea{
+		background-color: #f6f6f6;
+		box-shadow: none;
+	}
+	label{
+		font-size: 14px;
+	}
+	.gform_drop_area{
+		background-color: #f6f6f6 !important;
+		padding: 21px !important;
+		.gform_drop_instructions{
+			float: left;
+			margin-top: -10px;
 		}
-		.content {
-			padding-bottom: 2em;
-		}
-		.startup-email-link {
-			text-transform: uppercase;
-			color: #666;
-			font-size: .8em;
+		.gform_button_select_files{
+			color: black;
+			border: 1px solid black;
+			border-radius: 2px;
+			background-color: #f6f6f6;
+			position: absolute;
+			right: 4px;
+			bottom: -14px;
+			padding: 5px 10px;
 		}
 	}
+	.gform_footer.top_label{
+		text-align: center;
+		.gform_button{
+			color: black;
+			border: 1px solid black;
+			border-radius: 2px;
+			width: 300px;
+			margin: auto;
+			&:hover{
+				background-color: #f6f6f6;
+				color: #008cba;
+			}
+		}
+	}
+	.gform_wrapper.gravity-theme .gform_validation_errors{
+		background-color: #f6f6f6;
+	}
+	.thumb-link{
+		width: 80%
+	}
+	.type-mau_project {
+		height: 100%;
+		padding: 76px 2% 0;
+	}
+} 
+
+.row.jobs{
+	display: flex;
+	flex-wrap: wrap;
+	min-height: 70vh;
+	max-width: 1200px;
+	&.single{
+		max-width: 800px;
+	}
+}
+
+
+.job-card{
+	padding:24px!important;
+	max-width: 1200px;
+	margin: auto;
+	h2 {
+		font-size: 20px;
+		font-family: EuclidFlex-Medium, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		margin: 0 0 15px 0;
+	}
+	h1{
+		font-family: EuclidFlex-Medium, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-size: 1.2rem;
+		margin: 21px 0 15px;
+	}
+	p{
+		font-size: 13px
+	}
+	.image img {
+		width:100%
+	}
+	.project-tax-link{
+		color: #C1C1C1;
+	}
+	a:hover{
+		color: #000000
+	}
+}
+
+#menu-jobs-category-menu,
+#menu-contact-menu{
+		display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: white;
+    padding: 10px 0px;}
+#menu-jobs-category-menu li,
+#menu-contact-menu li{
+	padding: 0px 3%;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-family: EuclidFlex-Medium, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;}
+
+
+@media only screen and (max-width: 40em){
+	.jobs{
+		.type-mau_project .entry{
+			display: block
+		}
+		.thumb-link{
+			width: 100%;
+			margin-bottom: 20px;
+		}
+	} 
+}
 
 /* SLIDER FOUC */
 .no-js #featured .slide {
@@ -1821,3 +2102,359 @@ Visit http://sass-lang.com/ for more information.
 	    	}
     	}
 	}
+
+.tax-mau_project_tax .project-tax-list {
+	display: none
+}
+
+
+#menu-jobs-menu,#menu-contact-menu {
+    padding-left: 0 !important;
+}
+
+
+.jobs .type-mau_project {
+    padding: 6rem 0 0 0 !important;
+}
+
+@media only screen and (min-width: 40.063em){
+.medium-4 {
+width: 33.31%;
+}}
+
+
+.icon-heart {
+	padding-top: 26px;
+	background-position: left 28px
+}
+
+.tax-mau_project_tax .video-thumb {
+    width: 100%;
+}
+
+.job-card img { display: block !important}
+
+.home .projects.featured img.lazyload:not(.loaded) {
+    width: 10%;
+}
+
+.more-link a {
+    margin: 1em auto 3em;
+}
+
+.top-bar .toggle-topbar.menu-icon a {
+		//background-image: url("images/menu-toggle.svg") ;
+		background-repeat: no-repeat;
+		background-position: 10px 7px;
+}
+
+.grid-x{
+	display: flex;
+	flex-wrap: wrap
+}
+
+.text-grey{
+	color: #C1C1C1
+}
+
+
+@media (min-width: 1281px) {	
+	#projects-container {
+    display: flex;
+    flex-wrap: wrap;
+	}
+	
+	.projects .columns {
+	padding-top: 35px;
+	padding-bottom: 0px;
+	width: 33.3%;
+	}
+	
+	.home .small-12.more-link {
+	width: 100%;
+	}
+}
+
+
+/*contact submenu*/
+.jobs-menu{
+	max-width: 120em;
+	margin: 0 auto;
+}
+
+.contact-cards {
+    justify-content: flex-start !important;
+}
+
+.jobs-menu .current-menu-item a,
+.jobs-menu .current-menu-parent a {color: #999}
+
+#menu-jobs-menu,
+#menu-contact-menu{
+		display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: white;
+    padding: 7px 0px;}
+#menu-jobs-menu li,
+#menu-contact-menu li{
+	padding: 0px 3%;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-family: EuclidFlex-Medium, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+margin: 0}
+
+@media only screen and (min-width: 641px){
+
+	#menu-contact-menu{
+	padding-left: calc(187px + 5.5vw)
+}
+	.logged-in #menu-contact-menu{
+	padding-left: calc(135px + 3vw)}
+	#menu-jobs-menu{
+	padding-left: calc(74px + 3%);
+	}
+	.logged-in #menu-jobs-menu{
+	    padding-left: calc(13px + 3%);
+	}
+}
+
+@media only screen and (min-width: 1000px){
+
+	#menu-contact-menu{
+	padding-left: calc(210px + 3.6vw);
+}
+	.logged-in #menu-contact-menu{
+	padding-left: calc(135px + 3vw)}
+}
+
+@media only screen and (min-width: 1024px){
+
+	#menu-jobs-menu{
+	padding-left: calc(50px + 3%);
+}
+	.logged-in #menu-jobs-menu{
+	padding-left: 0;
+}
+}
+
+@media only screen and (min-width: 1400px){
+
+	#menu-contact-menu{
+	padding-left: calc(223px + 4vw);
+
+}
+	.logged-in #menu-contact-menu{
+	padding-left: calc(135px + 3vw)}
+}
+
+
+
+@media only screen and (max-width: 40em){.jobs .type-mau_project .entry{display: block}}
+
+
+/* contact */
+
+.contact .attachment-post-thumbnail{width: 80%}
+
+.contact-team-header{padding-top: 30px}
+
+
+.contact article{padding-top: 50px}
+
+.contact{
+	h1{
+		font-size: 40px;
+	}
+	h2{
+		font-size: 1.2rem;
+		font-family: EuclidFlex-Medium,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+	}
+	h3{
+		font-family: EuclidFlex-Medium,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+		font-size: 15px;
+	}
+	p{
+		font-size: 14px;
+	}
+}
+.contact-cards{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.contact-cards{
+	padding-top: 60px;
+}
+
+.contact-cards .card{
+	display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+	margin-bottom: 1rem;
+	padding-bottom: 50px;
+}
+
+.contact-cards h3{
+	font-size: 15px;
+	font-family: EuclidFlex-Medium,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+}
+.contact-cards p{
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 14px;
+	line-height: 28px;
+}
+
+.team-img{
+	width: 130px;
+	height: 130px;
+	border-radius: 200px;
+	margin-bottom: 2rem;
+}
+
+/* menu items order */
+
+@media only screen and (min-width: 641px){
+#menu-main-menu{display: flex;
+justify-content: center}
+
+#menu-main-menu li:nth-of-type(4){order:3}
+
+#menu-main-menu li:nth-of-type(3){order:4}
+#menu-main-menu li:nth-of-type(6){order:5}
+}
+
+
+
+/* linkedin icon */
+
+.menu-icon-lnk{
+	height: 70px;
+    padding-top: 16px;
+    background: #000;
+}
+
+.top-bar-section li.menu-icon-lnk:not(.has-form) a:not(.button){
+	background-image: url("images/linkedin.svg");
+    background-size: 19px 19px;
+	padding: 0;
+    margin-left: 9px;
+	margin-right: 2px;
+    width: 28px;
+    height: 37px;
+    overflow: hidden;
+    text-indent: -999px;
+    background-color: #000;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+@media screen and (max-width: 750px){
+	.top-bar-section li.menu-icon-fcb:not(.has-form){
+		padding-right: 0
+	}
+}
+@media screen and (max-width: 640px){
+	#menu-social-links{
+		display: flex;
+    flex-wrap: wrap;
+	flex-direction: row
+}
+
+#menu-social-links li:nth-of-type(1):not(.menu-icon-lnk){
+	width: 100%
+	}
+	.menu-icon-fcb,
+	.menu-icon-lnk{
+		width: 40px;
+	}
+	
+	.top-bar-section ul{
+		display: flex;
+		flex-direction: column;
+	}
+	
+	#menu-main-menu li:nth-of-type(3){
+		order: 4
+	}
+	#menu-main-menu li:nth-of-type(6){
+		order: 5
+	}
+}
+
+#menu-main-menu li:nth-of-type(5){display: none}
+
+.type-mau_project .entry p {font-size: 1rem}
+
+@media only screen and (min-width: 40.063em){
+	.tax-mau_clients_projects_category .project-tax-list.row ul, .tax-mau_project_tax .project-tax-list.row ul{padding: 10px 15px}
+}
+
+//cookie banner
+
+.cmplz-cookiebanner{
+	display: flex !important;
+	width: 100%;
+}
+	
+.cmplz-cookiebanner .cmplz-links .cmplz-link{
+	margin: auto !important;
+	white-space: nowrap
+}
+	
+.cmplz-cookiebanner.cmplz-dismissed{
+	display: none !important
+}
+	
+.cmplz-message, .cmplz-categories{
+	width: 100% !important
+}
+
+.cmplz-cookiebanner .cmplz-body{
+	margin: auto;
+}
+
+.page-template-lead-page #cmplz-cookiebanner-container,
+.post-type-archive-mau_project #cmplz-cookiebanner-container{
+	visibility: hidden;
+}
+
+#cmplz-manage-consent{
+	display: none;
+}
+
+//about
+
+.post-105{
+	h3{
+		font-family: EuclidFlex-Medium,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+		font-size: 20px;
+	}
+	h2{
+		font-family: "EuclidFlex-Light", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-size: 40px !important;
+	}
+} 
+
+//search results
+
+.search {
+	.has-post-thumbnail .attachment-large:not(.video-thumb){
+		max-height: 190px;
+		object-fit: cover;
+		object-position: top;
+	}
+	.index-card:not(.has-post-thumbnail) figure{
+		height: 190px;
+	}
+}
+
+
+
+
+
+
+
+
+

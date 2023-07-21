@@ -85,3 +85,41 @@ function my_custom_menu_contact() {
     register_nav_menu('contact-menu',__( 'Contact menu' ));
 }
 add_action( 'init', 'my_custom_menu_contact' );
+
+
+add_filter('relevanssi_search_filters','magiclab_relevanssi_filters', 10, 1);
+function magiclab_relevanssi_filters( $args ) {
+// Only if checkbox is checked
+	//if ( $_POST['only_finished_projects']) { 
+		if (isset($_GET['only_finished_projects'])) {
+	
+	// Change the array of post types
+		$args['post_type'] = array('mau_finished_project');
+	} 
+return $args;
+}
+
+add_filter( 'the_posts', function( $posts, $q ) 
+{
+    if( $q->is_main_query() && $q->is_search() ) 
+    {
+        usort( $posts, function( $a, $b ){
+            /**
+             * Sort by post type. If the post type between two posts are the same
+             * sort by post date. Make sure you change your post types according to 
+             * your specific post types. This is my post types on my test site
+             */
+            $post_types = [
+                'mlab_finished_series' => 1,
+                'mau_project'       => 2,
+                'mau_finished_project'    => 3
+            ];              
+            if ( $post_types[$a->post_type] != $post_types[$b->post_type] ) {
+                return $post_types[$a->post_type] - $post_types[$b->post_type];
+            } else {
+                return $a->post_date < $b->post_date; // Change to > if you need oldest posts first
+            }
+        });
+    }
+    return $posts;
+}, 10, 2 );

@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<div class="jobs-menu">
+<!-- <div class="jobs-menu">
     <?php // Jobs navigation
     
     add_action('startup_nav_bar_jobs','startup_nav_bar_jobs');
@@ -17,16 +17,20 @@
 		};
         
         startup_nav_bar_jobs();?>
-</div>
+</div> -->
 
-        <div id="<?php the_sub_field('anchor');?>" class="row projects-container jobs">
+        <div id="<?php the_sub_field('anchor');?>" class="row projects-container jobs single">
             <article class="type-mau_project">
-                <div class="columns medium-7 medium-push-5 large-8 large-push-4 image">
+                <div class="columns image">
                     <?php echo the_post_thumbnail('large')?>
                 </div>
-                <div class="entry column medium-5 medium-pull-7 large-4 large-pull-8">
-                    <h1><?php the_title(); ?></h1>
+                <div class="entry column">
+                    <h1 class="text-center"><?php the_title(); ?></h1>
                     <?php the_content(); ?>
+                </div>
+                <div class="application column">
+                    <h2 class="text-center showform">Apply for this job</h2>
+                    <?php gravity_form( 1, false, false, false, '', false ); ?>
                 </div>
                 
             </article>
